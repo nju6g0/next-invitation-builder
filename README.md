@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Invitation Builder
 
-## Getting Started
+一個使用 Next.js 15、TypeScript、Tailwind CSS 和 Zustand 構建的邀請函生成器專案。
 
-First, run the development server:
+## 技術棧
+
+- **Next.js 15** - React 框架（使用 App Router）
+- **TypeScript** - 類型安全的 JavaScript
+- **Tailwind CSS** - 實用優先的 CSS 框架
+- **Zustand** - 輕量級狀態管理庫
+
+## 開始使用
+
+### 安裝依賴
+
+```bash
+npm install
+```
+
+### 啟動開發伺服器
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+在瀏覽器中打開 [http://localhost:3000](http://localhost:3000) 查看結果。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 構建生產版本
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### 啟動生產伺服器
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 專案結構
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+next-invitation-builder/
+├── app/                    # Next.js App Router 頁面
+│   ├── page.tsx           # 首頁
+│   └── layout.tsx         # 根佈局
+├── components/            # React 組件
+│   └── Counter.tsx        # 範例計數器組件
+├── store/                 # Zustand 狀態管理
+│   └── useStore.ts        # 範例 store
+├── lib/                   # 工具函數
+├── public/                # 靜態資源
+└── package.json          # 專案配置
 
-## Deploy on Vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Zustand 使用範例
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+在 `store/useStore.ts` 中定義狀態：
+
+```typescript
+import { create } from "zustand";
+
+interface StoreState {
+  count: number;
+  increment: () => void;
+  decrement: () => void;
+  reset: () => void;
+}
+
+export const useStore = create<StoreState>((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 })),
+  decrement: () => set((state) => ({ count: state.count - 1 })),
+  reset: () => set({ count: 0 }),
+}));
+```
+
+在組件中使用：
+
+```typescript
+'use client';
+
+import { useStore } from '@/store/useStore';
+
+export default function Counter() {
+  const { count, increment, decrement, reset } = useStore();
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>增加</button>
+      <button onClick={decrement}>減少</button>
+      <button onClick={reset}>重置</button>
+    </div>
+  );
+}
+```
+
+## 學習資源
+
+- [Next.js 文檔](https://nextjs.org/docs)
+- [TypeScript 文檔](https://www.typescriptlang.org/docs/)
+- [Tailwind CSS 文檔](https://tailwindcss.com/docs)
+- [Zustand 文檔](https://docs.pmnd.rs/zustand/getting-started/introduction)
+
+## 部署
+
+推薦使用 [Vercel Platform](https://vercel.com) 部署 Next.js 應用。
+
+查看 [Next.js 部署文檔](https://nextjs.org/docs/app/building-your-application/deploying) 了解更多詳情。
