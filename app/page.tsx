@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="landing-page">
@@ -13,7 +15,9 @@ export default function Home() {
             為生命中的美好時刻，創造獨一無二的數位邀請函
           </p>
           <div className="hero-cta">
-            <button className="btn-primary">開始設計</button>
+            <Link href="/builder">
+              <button className="btn-primary">開始設計</button>
+            </Link>
             <button className="btn-secondary">瀏覽範本</button>
           </div>
         </div>
@@ -96,7 +100,9 @@ export default function Home() {
         <div className="cta-content">
           <h2 className="cta-title">準備好開始了嗎？</h2>
           <p className="cta-subtitle">讓我們一起為重要的日子，留下美好的記憶</p>
-          <button className="btn-primary large">免費開始設計</button>
+          <Link href="/builder">
+            <button className="btn-primary large">免費開始設計</button>
+          </Link>
         </div>
         <div className="cta-decoration">
           <div className="deco-circle circle-1"></div>
