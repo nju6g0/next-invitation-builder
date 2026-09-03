@@ -20,14 +20,13 @@
   --spacing-lg: 4rem;
   --spacing-xl: 6rem;
 
-  /* Typography */
-  --font-serif: var(--font-serif);
-  --font-sans: var(--font-sans);
+  /* Typography - These are set by Next.js font loader */
+  /* --font-serif: set by Noto_Serif_TC */
+  /* --font-sans: set by Noto_Sans_TC */
+  /* --font-playfair: set by Playfair_Display */
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -682,4 +681,9 @@ body {
   .hero-visual {
     display: none;
   }
+}
+
+/* Custom Font Utilities */
+.font-playfair {
+  font-family: var(--font-playfair);
 }
