@@ -6,6 +6,7 @@ import Image from "next/image";
 
 const TEXT = "Welcome to the Party!";
 // const TEXT = "We're Getting Married!";
+const imageUrl = "https://picsum.photos/800/600";
 
 interface FormFieldProps {
   label: string;
@@ -19,7 +20,7 @@ const FormField = ({ label, type, value, onChange }: FormFieldProps) => (
       {label}
     </label>
     <input
-      className="flex-1 px-2 bg-transparent text-white placeholder:text-white/50 border-b border-teal-950/30 focus:outline-none focus:ring-1 focus:ring-amber-100"
+      className="flex-1 px-2 bg-transparent placeholder:text-white/50 border-b border-teal-950/30 focus:outline-none focus:ring-1 focus:ring-amber-100"
       type={type}
       placeholder=""
       value={value}
@@ -28,7 +29,6 @@ const FormField = ({ label, type, value, onChange }: FormFieldProps) => (
   </div>
 );
 export default function Party() {
-  const [imageUrl, setImageUrl] = useState("https://picsum.photos/800/600");
   const [scales, setScales] = useState({ scaleX: 1, scaleY: 1 });
   const [initialSize, setInitialSize] = useState({ width: 0, height: 0 });
   const [showArch, setShowArch] = useState(true);
@@ -59,9 +59,6 @@ export default function Party() {
       const initialHeight = Math.round((initialWidth * 4) / 3);
 
       setInitialSize({ width: initialWidth, height: initialHeight });
-
-      // 使用固定解析度的圖片以確保品質
-      setImageUrl(`https://picsum.photos/800/600`);
 
       // 計算最終需要的 scale（基於實際初始尺寸）
       const finalScaleX = width / initialWidth;
@@ -124,7 +121,7 @@ export default function Party() {
         <>
           <div />
           <div>
-            <h1 className="font-playfair font-semibold text-center text-2xl px-4 py-1 overflow-hidden text-white drop-shadow-lg">
+            <h1 className="font-playfair font-semibold text-center text-4xl px-4 py-1 overflow-hidden text-white drop-shadow-lg">
               {TEXT.split("").map((char, index) =>
                 char === " " ? (
                   <span key={char + index}>&nbsp;</span>
@@ -144,20 +141,20 @@ export default function Party() {
                 ),
               )}
             </h1>
-            <p className="text-center text-white/80 text-sm mt-2 px-4 py-1 max-w-4xl drop-shadow-lg text-shadow-xs">
+            <p className="text-center text-white/80 text-sm mt-2 px-4 py-1 max-w-3xl drop-shadow-lg text-shadow-xs">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Accusantium sed qui odit? Ipsa atque nesciunt perspiciatis
               placeat, doloremque fugit consectetur.
             </p>
           </div>
           {rsvpSubmitted ? (
-            <p className="text-center text-white/80 text-sm mt-2 px-4 py-1 max-w-4xl drop-shadow-lg">
+            <p className="text-center text-white/80 text-sm mt-2 px-4 py-1 max-w-3xl drop-shadow-lg">
               Hi, {formData.name}! Thank you for your RSVP!
             </p>
           ) : (
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="w-full flex flex-col items-center gap-4 bg-amber-50/20 p-6 rounded-lg shadow-lg backdrop-blur-md"
+              className="w-full max-w-3xl flex flex-col items-center gap-4 bg-amber-50 p-6 rounded-lg shadow-lg backdrop-blur-md"
             >
               <FormField
                 label="Enter your email to RSVP:"
