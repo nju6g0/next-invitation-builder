@@ -12,12 +12,13 @@ function LayoutExample() {
   const [targetIndex, setTargetIndex] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState(0);
   const [activeColorIndex, setActiveColorIndex] = useState<number | null>(null);
+  const [activeColorKey, setActiveColorKey] = useState(COLORS[0]);
 
   useEffect(() => {
-    // const timer = setInterval(() => {
-    //   setColor((prev) => [...prev].sort(() => Math.random() - 0.5));
-    // }, 1000);
-    // return () => clearInterval(timer);
+    const timer = setInterval(() => {
+      setColor((prev) => [...prev].sort(() => Math.random() - 0.5));
+    }, 1000);
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -74,7 +75,8 @@ function LayoutExample() {
                 key={`pop_${item}_${index}`}
                 layoutId={`pop_${item}_${index}`}
                 style={{ backgroundColor: item }}
-                className="w-30 h-20 rounded-xl"
+                className="absolute top-0 left-0 w-full h-full rounded-xl z-1"
+                onClick={() => setActiveColorIndex(null)}
               />
             ) : (
               <motion.div
@@ -82,9 +84,72 @@ function LayoutExample() {
                 layoutId={`pop_${item}_${index}`}
                 style={{ backgroundColor: item }}
                 className="w-30 h-20 rounded-xl"
+                onClick={() => setActiveColorIndex(index)}
               />
             ),
           )}
+        </div>
+      </div>
+      <div className="mt-4 p-4 bg-black grid grid-cols-2 gap-4">
+        <div className="grid grid-flow-col grid-rows-4 gap-2">
+          <div className="row-span-4">
+            {COLORS.map(
+              (item) =>
+                activeColorKey !== item && (
+                  <motion.div
+                    key={`a_${item}`}
+                    layoutId={`a_${item}`}
+                    style={{ backgroundColor: item }}
+                    className="h-12 mt-2 rounded"
+                    onClick={() => setActiveColorKey(item)}
+                  />
+                ),
+            )}
+          </div>
+          <div className="col-span-3 row-span-4">
+            {COLORS.map(
+              (item) =>
+                activeColorKey === item && (
+                  <motion.div
+                    key={`a_${item}`}
+                    layoutId={`a_${item}`}
+                    style={{ backgroundColor: item }}
+                    className="h-full w-full rounded-2xl"
+                    onClick={() => setActiveColorKey(item)}
+                  />
+                ),
+            )}
+          </div>
+        </div>
+        <div className="h-50 flex flex-col">
+          <div className="flex gap-2">
+            {COLORS.map(
+              (item) =>
+                activeColorKey !== item && (
+                  <motion.div
+                    key={`b_${item}`}
+                    layoutId={`b_${item}`}
+                    style={{ backgroundColor: item }}
+                    className="w-12 h-10 rounded"
+                    onClick={() => setActiveColorKey(item)}
+                  />
+                ),
+            )}
+          </div>
+          <div className="flex-1 mt-2">
+            {COLORS.map(
+              (item) =>
+                activeColorKey === item && (
+                  <motion.div
+                    key={`b_${item}`}
+                    layoutId={`b_${item}`}
+                    style={{ backgroundColor: item }}
+                    className="h-full w-full rounded-2xl"
+                    onClick={() => setActiveColorKey(item)}
+                  />
+                ),
+            )}
+          </div>
         </div>
       </div>
       <AnimatePresence>
