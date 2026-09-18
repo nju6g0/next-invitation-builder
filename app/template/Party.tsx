@@ -77,9 +77,9 @@ export default function Party() {
   return (
     <div
       className="relative h-screen overflow-hidden flex flex-col items-center justify-between bg-black backdrop-blur-md bg-cover bg-center bg-no-repeat p-10"
-      style={{
-        backgroundImage: showArch ? "none" : `url(${imageUrl})`,
-      }}
+      // style={{
+      //   backgroundImage: showArch ? "none" : `url(${imageUrl})`,
+      // }}
     >
       {showArch && initialSize.width > 0 && (
         <motion.div
@@ -87,7 +87,7 @@ export default function Party() {
           style={{
             width: `${initialSize.width}px`,
             height: `${initialSize.height}px`,
-            backgroundImage: `url(${imageUrl})`,
+            // backgroundImage: `url(${imageUrl})`,
           }}
           initial={{
             x: "-50%",
