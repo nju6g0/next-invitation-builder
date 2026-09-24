@@ -8,12 +8,14 @@ import {
   LayoutExample,
   InViewExample,
   VariantsExample,
+  TransitionExample,
 } from "./_components";
 
 function MotionContent() {
-  const { activeTab, changeTab } = useTabNavigation("examples");
+  const { activeTab, changeTab } = useTabNavigation("transition");
 
   const tabs = [
+    { id: "transition", label: "Transition", content: <TransitionExample /> },
     { id: "examples", label: "Examples", content: <Examples /> },
     { id: "layout", label: "Layout", content: <LayoutExample /> },
     { id: "inView", label: "InView", content: <InViewExample /> },
@@ -23,7 +25,6 @@ function MotionContent() {
       content: <VariantsExample />,
     },
     { id: "practice", label: "practice", content: <Practice /> },
-    { id: "opacity", label: "Opacity", content: <div>Opacity Animation</div> },
   ];
 
   return (
